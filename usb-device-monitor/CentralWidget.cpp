@@ -55,7 +55,8 @@ CentralWidget::CentralWidget(QMainWindow *_parent) :
         //
         auto devices = getDevices();
         table->setRowCount(devices.size());
-        QStringList headers = {"Device", "Adapter Name", "Hex Identification"};
+        QStringList headers = 
+            {"Device", "Adapter Name", "Unique Identification"};
         table->setColumnCount(headers.size());
         table->setHorizontalHeaderLabels(headers);
         table->horizontalHeader()->setStretchLastSection(true);
