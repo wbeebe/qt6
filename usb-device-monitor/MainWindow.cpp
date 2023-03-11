@@ -32,7 +32,6 @@ MainWindow::MainWindow() {
     dockingPanel = new DockingPanel(this, cwidget);
     addDockWidget(Qt::LeftDockWidgetArea, dockingPanel);
     createFileMenu();
-    //statusBar()->showMessage("Statusbar Placeholder");
 
     QSettings settings(
         QCoreApplication::organizationName(),

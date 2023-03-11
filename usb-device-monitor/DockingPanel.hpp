@@ -30,6 +30,8 @@
 
 class DockingPanel : public QDockWidget {
     public:
+    const QString ECHO_STATE{"dock/echo_to_terminal"};
+    const QString LOG_STATE{"dock/log_to_file"};
     explicit DockingPanel(QMainWindow *parent, CentralWidget *cwidget);
     void saveDPState(QSettings &settings);
     void restoreDPState(QSettings &settings);
@@ -38,9 +40,7 @@ class DockingPanel : public QDockWidget {
     QMainWindow *parent;
     CentralWidget *cwidget;
     QCheckBox
-        *cb1,
-        *cb2,
-        *cb3,
-        *cb4;
+        *echo_to_terminal,
+        *log_to_file;
     QComboBox *comboBox;
 };

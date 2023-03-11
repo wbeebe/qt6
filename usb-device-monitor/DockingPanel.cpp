@@ -34,18 +34,14 @@ DockingPanel::DockingPanel(QMainWindow *_parent, CentralWidget *_cwidget) : QDoc
     checkboxSelection->setObjectName("Checkboxes");
     QVBoxLayout *cslayout = new QVBoxLayout(checkboxSelection);
     cslayout->setObjectName("Checkbox_Layout");
-    cb1 = new QCheckBox("Echo to terminal", this);
-    connect(cb1, &QCheckBox::stateChanged,
+    echo_to_terminal = new QCheckBox("Echo to terminal", this);
+    connect(echo_to_terminal, &QCheckBox::stateChanged,
             cwidget, &CentralWidget::toggleTerminalOut);
-    cslayout->addWidget(cb1, 0, Qt::AlignLeft);
-    cb2 = new QCheckBox("Log to file", this);
-    connect(cb2,&QCheckBox::stateChanged,
+    cslayout->addWidget(echo_to_terminal, 0, Qt::AlignLeft);
+    log_to_file = new QCheckBox("Log to file", this);
+    connect(log_to_file,&QCheckBox::stateChanged,
             cwidget, &CentralWidget::toggleLogConsole);
-    cslayout->addWidget(cb2, 1, Qt::AlignLeft);
-    //cb3 = new QCheckBox("Three", this);
-    //cslayout->addWidget(cb3, 2, Qt::AlignLeft);
-    //cb4 = new QCheckBox("Four", this);
-    //cslayout->addWidget(cb4, 3, Qt::AlignLeft);
+    cslayout->addWidget(log_to_file, 1, Qt::AlignLeft);
     checkboxSelection->setLayout(cslayout);
     grid->addWidget(checkboxSelection, 0, 0);
 /*
@@ -75,17 +71,11 @@ DockingPanel::DockingPanel(QMainWindow *_parent, CentralWidget *_cwidget) : QDoc
 }
 
 void DockingPanel::saveDPState(QSettings &settings) {
-    settings.setValue("dock/cb1",cb1->isChecked());
-    settings.setValue("dock/cb2",cb2->isChecked());
-    //settings.setValue("dock/cb3",cb3->isChecked());
-    //settings.setValue("dock/cb4",cb4->isChecked());
-    //settings.setValue("dock/combo1", comboBox->currentIndex());
+    settings.setValue(ECHO_STATE,echo_to_terminal->isChecked());
+    settings.setValue(LOG_STATE,log_to_file->isChecked());
 }
 
 void DockingPanel::restoreDPState(QSettings &settings) {
-    cb1->setChecked(settings.value("dock/cb1").toBool());
-    cb2->setChecked(settings.value("dock/cb2").toBool());
-    //cb3->setChecked(settings.value("dock/cb3").toBool());
-    //cb4->setChecked(settings.value("dock/cb4").toBool());
-    //comboBox->setCurrentIndex(settings.value("dock/combo1").toInt());
+    echo_to_terminal->setChecked(settings.value(ECHO_STATE).toBool());
+    log_to_file->setChecked(settings.value(LOG_STATE).toBool());
 }
